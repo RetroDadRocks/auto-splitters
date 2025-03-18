@@ -1,4 +1,4 @@
-state("Mesen", "0.0.1.0") {
+state("Mesen","0.0.7.0") {
     byte xPosGeneral		     : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x63;
     byte yPosition	    	     : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x67;
     byte selectableItems         : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0xF0;
@@ -10,11 +10,39 @@ state("Mesen", "0.0.1.0") {
     byte itemStatus              : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x95;
     byte events                  : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0xF2;
     byte gaeaAwakes              : "MesenCore.dll", 0x42F99D0, 0xB8, 0x58, 0x40E;
-    
-
 }
 
-// -------------------------------------------------------------------------------------------------------------------------------
+state("Mesen", "0.9.8.0")
+{
+    byte xPosGeneral		     : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0x63;
+    byte yPosition	    	     : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0x67;
+    byte selectableItems         : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0xF0;
+    byte unselectableItems       : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0xF1;
+    byte dynamicBattleAlert      : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0x10C;
+    byte bossesMerit             : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0xF4;
+    byte dynamicArea             : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0xF5;
+    byte subArea                 : "MesenCore.dll", 0x4327750, 0xB8, 0x78 , 0x2F;
+    byte itemStatus              : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0x95;
+    byte events                  : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0xF2;
+    byte gaeaAwakes              : "MesenCore.dll", 0x4327750, 0xB8, 0x78, 0x40E;
+}
+
+state("Mesen", "0.9.9.0") 
+{
+    byte xPosGeneral		     : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x63;
+    byte yPosition	    	     : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x67;
+    byte selectableItems         : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0xF0;
+    byte unselectableItems       : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0xF1;
+    byte dynamicBattleAlert      : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x10C;
+    byte bossesMerit             : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0xF4;
+    byte dynamicArea             : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0xF5;
+    byte subArea                 : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x2F;
+    byte itemStatus              : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x95;
+    byte events                  : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0xF2;
+    byte gaeaAwakes              : "MesenCore.dll", 0x042E0F30, 0, 0x58, 0xC90, 0x58, 0x40E;
+}
+
+
 state("fceux", "2.2.3")
 {
     byte xPosGeneral		     : 0x003B1388, 0x63;
@@ -29,8 +57,6 @@ state("fceux", "2.2.3")
     byte events                  : 0x003B1388, 0xF2;
     byte gaeaAwakes              : 0x003B1388, 0x40E;
 }
-
-// --------------------------------------------------------------------------------------------------------------------------------
 
 startup
 {
@@ -78,14 +104,20 @@ startup
     settings.Add("hadesPalace", true, "Enter Hades Palace","location8");
     settings.Add("hadesBattle", true, "Begin Hades Battle","location8");
 
-    settings.Add("credits", true, "The Battle of Olympus AutoSplitter v0.1 by RetroDad");
-	settings.Add("support", true, "Supported emulators : mesen RTA 0.0.7 | fceux 2.2.3", "credits");
+    settings.Add("credits", true, "The Battle of Olympus AutoSplitter v1.0 by RetroDad");
+	settings.Add("support", true, "Supported emulators : Mesen RTA 0.0.7, 0.9.8, 0.9.9 | fceux 2.2.3", "credits");
 
     // ------------------------------------------------------------------------------------------------------------
 
 }
 
 init {
+    version = modules.First().FileVersionInfo.FileVersion;
+
+    if(version == "0.0.1.0"){
+        version = "0.0.7.0";
+    }
+
     // Items that can be selected
     vars.sword = 4;
     vars.harp = 16;
